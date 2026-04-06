@@ -1,0 +1,69 @@
+body {
+    background-color: #353746;
+    color: #eeeeec;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #464c5e;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    color: #FFC000;
+    font-size: 56px;
+    margin: 0;
+    -webkit-text-stroke: 2px #FFC000;
+    -webkit-text-fill-color: transparent;
+}
+
+.video-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background: #2a2f3a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.video-container h2 {
+    color: #FFC000;
+    margin-top: 0;
+}
+
+.comments-section {
+    max-width: 1000px;
+    margin: 30px auto;
+    background: #2a2f3a;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.comment {
+    background: #3e4456;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #FFC000;
+    background: #fff;
+    color: #000;
+}
+
+.comment-form input[type="submit"] {
+    background: #FFC000;
+    border: none;
+    padding: 8px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}

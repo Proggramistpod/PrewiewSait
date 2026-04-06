@@ -1,0 +1,233 @@
+#menu-icon {
+    position: absolute;
+    left: -9999px;
+}
+
+/* Стили для иконки меню (лейбл) */
+#menu-icon:checked + label,
+#menu-icon:not(:checked) + label {
+    position: fixed;
+    top: 63px;
+    right: 75px;
+    display: block;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#menu-icon:checked + label::before,
+#menu-icon:not(:checked) + label::before,
+#menu-icon:checked + label::after,
+#menu-icon:not(:checked) + label::after {
+    position: absolute;
+    content: '';
+    display: block;
+    z-index: 20;
+    transition:
+        border-width 100ms 1500ms ease,
+        top 100ms 1600ms cubic-bezier(0.23, 1, 0.32, 1),
+        height 100ms 1600ms cubic-bezier(0.23, 1, 0.32, 1),
+        background-color 200ms ease,
+        transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Стили для ::before (верхняя и нижняя линии) */
+#menu-icon:checked + label::before,
+#menu-icon:not(:checked) + label::before {
+    width: 30px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    border-top: 2px solid #eceeec;
+    border-bottom: 2px solid #eceeec;
+    background-color: transparent;
+}
+
+/* Стили для ::after (средняя линия) */
+#menu-icon:checked + label::after,
+#menu-icon:not(:checked) + label::after {
+    width: 22px;
+    height: 2px;
+    top: 10px;
+    right: 4px;
+    background-color: #eceeec;
+    margin-top: -1px;
+}
+
+/* Состояние checked – превращаем в крестик (X) */
+#menu-icon:checked + label::before {
+    top: 10px;
+    transform: rotate(45deg);
+    height: 2px;
+    background-color: #eceeec;
+    border-width: 0;
+    transition:
+        border-width 100ms 340ms ease,
+        top 100ms 300ms cubic-bezier(0.23, 1, 0.32, 1),
+        height 100ms 300ms cubic-bezier(0.23, 1, 0.32, 1),
+        background-color 200ms 500ms ease,
+        transform 200ms 1700ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#menu-icon:checked + label::after {
+    width: 30px;
+    margin-top: 0;
+    right: 0;
+    transform: rotate(-45deg);
+    transition:
+        width 100ms ease,
+        right 100ms ease,
+        margin-top 100ms 500ms ease,
+        transform 200ms 1700ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Навигационная панель */
+#menu-icon:checked ~ nav,
+#menu-icon:not(:checked) ~ nav {
+    position: fixed;
+    top: 33px;
+    right: 50px;
+    display: block;
+    width: 80px;
+    height: 80px;
+    padding: 0;
+    margin: 0;
+    z-index: 9;
+    overflow: hidden;
+    box-shadow: 0 8px 30px 0 rgba(0,0,0,0.3);
+    background-color: #353746;
+    animation: border-transform 7s linear infinite;
+    transition:
+        top 350ms 1100ms cubic-bezier(0.23, 1, 0.32, 1),
+        right 350ms 1100ms cubic-bezier(0.23, 1, 0.32, 1),
+        transform 250ms 1100ms ease,
+        width 650ms 400ms cubic-bezier(0.23, 1, 0.32, 1),
+        height 650ms 400ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Ключевые кадры */
+@keyframes border-transform {
+    0%, 100% { border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%; }
+    14% { border-radius: 40% 60% 54% 46% / 49% 60% 40% 51%; }
+    20% { border-radius: 54% 46% 38% 62% / 49% 78% 30% 51%; }
+    42% { border-radius: 61% 39% 55% 45% / 61% 38% 62% 39%; }
+    56% { border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%; }
+    70% { border-radius: 50% 50% 34% 60% / 56% 68% 32% 44%; }
+    84% { border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%; }
+}
+
+/* Открытое меню */
+#menu-icon:checked ~ nav {
+    animation-play-state: paused;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    width: 200%;
+    height: 200%;
+    transition:
+        top 350ms 700ms cubic-bezier(0.23, 1, 0.32, 1),
+        right 350ms 700ms cubic-bezier(0.23, 1, 0.32, 1),
+        transform 250ms 700ms ease,
+        width 750ms 1000ms cubic-bezier(0.23, 1, 0.32, 1),
+        height 750ms 1000ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Список меню */
+#menu-icon:not(:checked) ~ nav ul {
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    transition: all 250ms linear;
+}
+
+#menu-icon:checked ~ nav ul {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: auto;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 350ms ease, transform 250ms ease;
+}
+
+/* Элементы списка */
+nav ul li {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 10px 0;
+    text-align: center;
+    list-style: none;
+    transition: all 250ms linear;
+}
+
+/* Задержки открытия (8 пунктов) */
+#menu-icon:checked ~ nav ul li:nth-child(1) { transition-delay: 1400ms; }
+#menu-icon:checked ~ nav ul li:nth-child(2) { transition-delay: 1480ms; }
+#menu-icon:checked ~ nav ul li:nth-child(3) { transition-delay: 1560ms; }
+#menu-icon:checked ~ nav ul li:nth-child(4) { transition-delay: 1640ms; }
+#menu-icon:checked ~ nav ul li:nth-child(5) { transition-delay: 1720ms; }
+#menu-icon:checked ~ nav ul li:nth-child(6) { transition-delay: 1800ms; }
+#menu-icon:checked ~ nav ul li:nth-child(7) { transition-delay: 1880ms; }
+#menu-icon:checked ~ nav ul li:nth-child(8) { transition-delay: 1960ms; }
+
+/* Задержки закрытия */
+#menu-icon:not(:checked) ~ nav ul li:nth-child(1) { transition-delay: 200ms; }
+#menu-icon:not(:checked) ~ nav ul li:nth-child(2) { transition-delay: 150ms; }
+#menu-icon:not(:checked) ~ nav ul li:nth-child(3) { transition-delay: 100ms; }
+#menu-icon:not(:checked) ~ nav ul li:nth-child(4) { transition-delay: 50ms; }
+#menu-icon:not(:checked) ~ nav ul li:nth-child(5) { transition-delay: 0ms; }
+#menu-icon:not(:checked) ~ nav ul li:nth-child(6) { transition-delay: 0ms; }
+#menu-icon:not(:checked) ~ nav ul li:nth-child(7) { transition-delay: 0ms; }
+#menu-icon:not(:checked) ~ nav ul li:nth-child(8) { transition-delay: 0ms; }
+
+/* Ссылки */
+nav ul li a {
+    font: 800 9vh/1.2 'Montserrat', sans-serif;
+    display: inline-block;
+    position: relative;
+    color: #FFC000;
+    text-decoration: none;
+    transition: all 250ms linear;
+}
+
+nav ul li a:hover {
+    color: #000000;
+}
+
+nav ul li a::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 55%;
+    left: 0;
+    height: 1vh;
+    margin-top: -1vh;
+    width: 0;
+    background-color: #353746;
+    opacity: 0.8;
+    transition: width 250ms linear;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Кнопка "Создать пост" */
+.create-post-btn {
+    background: #FFC000;
+    color: #353746 !important;
+    padding: 5px 15px;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+.create-post-btn:hover {
+    background: #ffd903;
+    transform: scale(1.02);
+}
